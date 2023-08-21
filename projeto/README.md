@@ -38,17 +38,17 @@
 
 **Como** membro da secretaria,
 
-**Eu quero** verificar se cada disciplina tem pelo menos 3 alunos matriculados,
+**Eu quero** verificar quais disciplinas tiveram menos de 3 alunos inscritos e, portanto, foram canceladas,
 
-**Para que eu possa** determinar quais disciplinas serão oferecidas no próximo semestre.
+**Para que eu possa** garantir que apenas disciplinas viáveis sejam oferecidas no próximo semestre.
 
 ## 6. Encerramento de Inscrições
 
 **Como** membro da secretaria,
 
-**Eu quero** encerrar as inscrições de uma disciplina quando atingir o limite de 60 alunos matriculados,
+**Eu quero** verificar quais disciplinas atingiram o limite de 60 alunos matriculados e tiveram suas inscrições encerradas,
 
-**Para que eu possa** garantir um número adequado de alunos por disciplina.
+**Para que eu possa** garantir que todas as disciplinas estejam com o número adequado de alunos matriculados.
 
 ## 7. Notificação ao Sistema de Cobranças
 
