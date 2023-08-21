@@ -10,15 +10,23 @@
 
 **Para que eu possa** acessar as funcionalidades do sistema de matrículas.
 
-## 2. Visualização de Disciplinas
+## 2. Visualização de Disciplinas Aluno
 
-**Como** aluno ou professor,
+**Como** aluno,
 
 **Eu quero** visualizar a lista de disciplinas disponíveis para o próximo semestre,
 
-**Para que eu possa** escolher quais disciplinas desejo me matricular ou ministrar.
+**Para que eu possa** escolher quais disciplinas desejo me matricular.
 
-## 3. Matrícula em Disciplinas
+## 3. Visualização de Disciplinas Professor
+
+**Como** professor,
+
+**Eu quero** visualizar a lista de disciplinas disponíveis para o próximo semestre,
+
+**Para que eu possa** escolher quais disciplinas desejo ministrar.
+
+## 4. Matrícula em Disciplinas
 
 **Como** aluno,
 
@@ -26,7 +34,7 @@
 
 **Para que eu possa** definir meu plano de estudos para o próximo semestre.
 
-## 4. Cancelamento de Matrícula
+## 5. Cancelamento de Matrícula
 
 **Como** aluno,
 
@@ -34,23 +42,23 @@
 
 **Para que eu possa** ajustar meu plano de estudos de acordo com minhas necessidades.
 
-## 5. Verificação de Disciplinas Ativas
+## 6. Verificação de Disciplinas Ativas
 
 **Como** membro da secretaria,
 
-**Eu quero** verificar quais disciplinas tiveram menos de 3 alunos inscritos e, portanto, foram canceladas,
+**Eu quero** validar quais disciplinas tiveram menos de 3 alunos inscritos e, portanto, foram canceladas,
 
 **Para que eu possa** garantir que apenas disciplinas viáveis sejam oferecidas no próximo semestre.
 
-## 6. Encerramento de Inscrições
+## 7. Encerramento de Inscrições
 
 **Como** membro da secretaria,
 
-**Eu quero** verificar quais disciplinas atingiram o limite de 60 alunos matriculados e tiveram suas inscrições encerradas,
+**Eu quero** validar quais disciplinas atingiram o limite de 60 alunos matriculados e tiveram suas inscrições encerradas,
 
 **Para que eu possa** garantir que todas as disciplinas estejam com o número adequado de alunos matriculados.
 
-## 7. Notificação ao Sistema de Cobranças
+## 8. Notificação ao Sistema de Cobranças
 
 **Como** usuário do sistema de cobranças,
 
@@ -58,7 +66,7 @@
 
 **Para que** as cobranças possam ser processadas para as disciplinas daquele semestre.
 
-## 8. Visualização de Alunos por Disciplina
+## 9. Visualização de Alunos por Disciplina
 
 **Como** professor,
 
