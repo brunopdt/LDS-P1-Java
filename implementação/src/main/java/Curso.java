@@ -1,14 +1,20 @@
 import java.util.HashMap;
+import java.util.List;
 
 public class Curso implements ISalvavel {
   private String nome;
   private int creditos;
-  private HashMap<Disciplina, Integer> disciplinas;
+  private List<Disciplina> disciplinas;
 
-  public void listarDisciplinas() {
+  public List<Disciplina> listarDisciplinas() {
+    return disciplinas;
   };
 
   public void salvarEmArquivo() {
     // TODO
   };
+
+  public void adicionarDisciplina(Disciplina disciplina){
+    disciplinas.add(disciplina);
+  }
 }

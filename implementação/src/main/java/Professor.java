@@ -13,10 +13,16 @@ public class Professor extends Usuario {
     // TODO
   };
 
-  public void listarTurmasLecionadas() {
+  public List<Turma> listarTurmasLecionadas() {
+    return turmasLecionadas;
   };
 
-  public Aluno[] visualizarAlunos() {
+  public Aluno[] visualizarAlunos(Turma turmaDoAluno) {
+    for (Turma turma : turmasLecionadas) {
+      if(turma.equals(turmaDoAluno)){
+        return turma.listarAlunos();
+      }
+    }
     return null;
   }
 }
