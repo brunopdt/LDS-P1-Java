@@ -14,4 +14,8 @@ public abstract class Usuario implements ISalvavel {
 
   public void salvarEmArquivo() {
   };
+
+  public String getUsuario() {
+    return usuario;
+  }
 }

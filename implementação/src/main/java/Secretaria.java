@@ -1,8 +1,9 @@
-import java.util.List;
-
 public class Secretaria extends Usuario implements IGerenciavel {
-  public Secretaria(String nome, String sobrenome, String usuario, String senha) {
+  private Universidade universidade;
+
+  public Secretaria(String nome, String sobrenome, String usuario, String senha, Universidade u) {
     super(nome, sobrenome, usuario, senha, true);
+    this.universidade = u;
   }
 
   @Override
@@ -11,28 +12,37 @@ public class Secretaria extends Usuario implements IGerenciavel {
   };
 
   public void validarDisciplina(Turma turma) {
-  
+    turma.setStatus(turma.validarTurma() ? ETurmaStatus.ATIVA : ETurmaStatus.EM_ANALISE);
   }
 
   @Override
-  public void cadastrarUsuario(Usuario usuario) {
-    // TODO Auto-generated method stub
-    //Pensar em classe para armazenar Usuarios ou no main?
-    throw new UnsupportedOperationException("Unimplemented method 'cadastrarUsuario'");
+  public void cadastrarUsuario(Usuario usuario) throws Exception {
+    Class<? extends Usuario> classeUsuario = usuario.getClass();
+
+    switch (classeUsuario.getSimpleName()) {
+      case "Secretaria":
+        universidade.cadastrarSecretaria((Secretaria) usuario);
+        break;
+      case "Professor":
+        universidade.cadastrarProfessor((Professor) usuario);
+        break;
+      case "Aluno":
+        universidade.cadastrarAluno((Aluno) usuario);
+        break;
+      default:
+        // Lógica para lidar com outros tipos de usuários ou erro.
+        break;
+    }
   }
 
   @Override
   public void cadastrarCurso(Curso curso) {
-    // TODO Auto-generated method stub
-    //Onde salvar esses cursos, qual classe?
-    throw new UnsupportedOperationException("Unimplemented method 'cadastrarCurso'");
+    universidade.cadastrarCurso(curso);
   }
 
   @Override
-  public List<Curso> listarCursos() {
-    // TODO Auto-generated method stub Onde 
-    //Onde pegar esses cursos?
-    throw new UnsupportedOperationException("Unimplemented method 'listarCursos'");
+  public Curso[] listarCursos() {
+    return universidade.listarCursos();
   }
 
   @Override
@@ -40,7 +50,6 @@ public class Secretaria extends Usuario implements IGerenciavel {
     curso.adicionarDisciplina(disciplina);
   };
 
-  public void criarTurma(Professor professor, Disciplina disciplina){
-    
+  public void criarTurma(Professor professor, Disciplina disciplina) {
   }
 }

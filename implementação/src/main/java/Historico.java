@@ -3,7 +3,7 @@ public class Historico {
   Turma turma;
   EStatus status;
 
-  public Historico(Turma turma, Aluno aluno){
+  public Historico(Turma turma, Aluno aluno) {
     this.turma = turma;
     this.aluno = aluno;
     this.status = EStatus.CURSANDO;
@@ -15,5 +15,9 @@ public class Historico {
 
   public Turma getTurma() {
     return turma;
+  }
+
+  public EStatus getStatus() {
+    return status;
   }
 }

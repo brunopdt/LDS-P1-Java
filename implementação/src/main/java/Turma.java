@@ -7,10 +7,16 @@ public class Turma implements ISalvavel {
   private Professor professor;
   private List<Historico> historicos;
   private int numeroMaximoAlunos;
+  private int numeroMinimoAlunos;
+  private ETurmaStatus status;
+  private double valor;
 
-  public Turma(Professor professor, Disciplina disciplina){
+  public Turma(Professor professor, Disciplina disciplina) {
     this.disciplina = disciplina;
     this.professor = professor;
+    this.numeroMaximoAlunos = 60;
+    this.numeroMinimoAlunos = 3;
+    this.status = ETurmaStatus.EM_ANALISE;
     historicos = new ArrayList<>();
   }
 
@@ -19,27 +25,32 @@ public class Turma implements ISalvavel {
     // TODO
   };
 
-  public void adicionarHistoricos(Historico historico) throws Exception{
-    if(historicos.size() <= numeroMaximoAlunos){
+  public void adicionarHistoricos(Historico historico) throws Exception {
+    if (historicos.size() <= numeroMaximoAlunos) {
       historicos.add(historico);
     } else {
       throw new Exception("A turma está cheia");
     }
   }
 
-  public boolean validarTurma(){
-    if(historicos.size() < 3){
-      return false;
-    } else {
-      return true;
-    }
+  public boolean validarTurma() {
+    return (historicos.size() < numeroMinimoAlunos || historicos.size() > numeroMaximoAlunos);
   }
 
-  public Aluno[] listarAlunos(){
+  public Aluno[] listarAlunos() {
     List<Aluno> alunos = new ArrayList<>();
-      for (Historico historico : historicos) {
-        alunos.add(historico.getAluno()) ;
-      }
-    return null;
+    for (Historico historico : historicos) {
+      if (historico.getStatus() == EStatus.CURSANDO)
+        alunos.add(historico.getAluno());
+    }
+    return alunos.toArray(null);
+  }
+
+  public void setStatus(ETurmaStatus es) {
+    this.status = es;
+  }
+
+  public ETurmaStatus getStatus() {
+    return status;
   }
 }
