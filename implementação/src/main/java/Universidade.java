@@ -50,8 +50,30 @@ public class Universidade {
     this.cursos.put(c.getNome(), c);
   };
 
+  public void CarregarCursos(){
+    Curso engSoftware = new Curso("EngSoftware", 12, null);
+    Curso engConp = new Curso("Eng Coputação", 12, null);
+    Curso engCivil = new Curso("eng Civil", 12, null);
+    Curso engElet = new Curso("Eng Eletrica", 12, null);
+    Curso engMec = new Curso("Eng Mecanica", 12, null);
+    Curso engQui = new Curso("Eng Quimica", 12, null);
+    this.cursos.put("Engenharia de Software", engSoftware);
+    this.cursos.put("Engenharia Computação", engConp);
+    this.cursos.put("Engenharia Civil", engCivil);
+    this.cursos.put("Engenharia Elétrica", engElet);
+    this.cursos.put("Engenharia Mecânica", engMec);
+    this.cursos.put("Engenharia Química", engQui);
+  }
+
   public Curso[] listarCursos() {
-    return (Curso[]) this.cursos.values().toArray();
+    CarregarCursos();
+    Curso[] cursosArray = new Curso[this.cursos.size()];
+    int i = 0;
+    for (Curso curso : this.cursos.values()) {
+        cursosArray[i] = curso;
+        i++;
+    }
+    return cursosArray;
   };
 
   public void cadastrarDisciplina(Disciplina d, Curso c) {

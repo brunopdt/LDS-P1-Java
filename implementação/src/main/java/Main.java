@@ -40,6 +40,49 @@ public class Main {
 		System.out.println("6 - Sair");
 	}
 
+	public static void cadastrarSecretaria(){
+		System.out.println("Digite o nome da secretaria: ");
+		String nome = sc.next();
+		System.out.println("Digite o sobrenome da secretaria: ");
+		String sobrenome = sc.next();
+		System.out.println("Digite o nome de usuário da secretaria: ");
+		String usuario = sc.next();
+		System.out.println("Digite a senha da secretaria: ");
+		String senha = sc.next();
+		
+		Secretaria secretaria = new Secretaria(nome, sobrenome, usuario, senha, universidade);
+		try {
+			universidade.cadastrarSecretaria(secretaria);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public static void cadastrarProfessor(){
+		System.out.println("Digite o nome do professor: ");
+		String nome = sc.next();
+		System.out.println("Digite o sobrenome do professor: ");
+		String sobrenome = sc.next();
+		System.out.println("Digite o nome de usuário do professor: ");
+		String usuario = sc.next();
+		System.out.println("Digite a senha do professor: ");
+		String senha = sc.next();
+		System.out.println("Escolha o curso do professor: ");
+
+		for (int i = 0; i < universidade.listarCursos().length; i++) {
+			System.out.println(i + 1 + " - " + universidade.listarCursos()[i].getNome());
+		}
+
+		int opcao = sc.nextInt();
+		Curso curso = universidade.listarCursos()[opcao - 1];
+
+		Professor professor = new Professor(nome, sobrenome, usuario, senha);
+		try {
+			universidade.cadastrarProfessor(professor);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	public static void cadastrarAluno() {
 		System.out.println("Digite o nome do aluno: ");
 		String nome = sc.next();
@@ -75,10 +118,10 @@ public class Main {
 				cadastrarAluno();
 				break;
 			case 2:
-				// cadastrarProfessor(); COLOCAR METODO DE CADASTRO DE PROFESSOR
+				 cadastrarProfessor(); 
 				break;
 			case 3:
-				// cadastrarSecretaria(); COLOCAR METODO DE CADASTRO DE SECRETARIA
+				 cadastrarSecretaria(); 
 				break;
 			default:
 				System.out.println("Opção inválida");
