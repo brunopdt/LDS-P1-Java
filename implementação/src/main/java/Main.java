@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,36 +20,81 @@ public class Main {
 
 	public static void menuAluno() {
 		System.out.println("1 - Matricular em uma Turma"); // LISTAR AS TURMAS COM RESPECTIVAS MATÉRIAS E PERGUNTAR QUAL
-																												// QUER MATRICULAR, EX: T1-MATEMATICA, T2-PORTUGUES ---------
-																												// OBS: COLOCAR UM TRY CATCH CASO O VALOR DE CRÉDITOS EXCEDA O
-																												// MÁXIMO PERMITIDO
-		System.out.println("2 - Cancelar Matricula"); // MOSTRAR QUAIS HISTORICOS ESTAO COM O STATUS E PERGUNTAR QUAL QUER
-																									// TRANCAR (MUDAR O STATUS)
+															// QUER MATRICULAR, EX: T1-MATEMATICA, T2-PORTUGUES
+															// ---------
+															// OBS: COLOCAR UM TRY CATCH CASO O VALOR DE CRÉDITOS EXCEDA
+															// O
+															// MÁXIMO PERMITIDO
+		System.out.println("2 - Cancelar Matricula"); // MOSTRAR QUAIS HISTORICOS ESTAO COM O STATUS E PERGUNTAR QUAL
+														// QUER
+														// TRANCAR (MUDAR O STATUS)
 		System.out.println("3 - Listar Turmas Matriculadas"); // LISTAR HISTORICOS COM O STATUS ATIVO - PEGANDO A
-																													// PROPRIEDADE TURMA
+																// PROPRIEDADE TURMA
 		System.out.println("4 - Valor Matricula"); // SOMAR O VALOR DE TODOS OS HISTÓRICOS COM O STATUS ATIVO E PEGAR O
-																								// VALOR DA TURMA
+													// VALOR DA TURMA
 		System.out.println("5 - Sair");
 	}
 
 	public static void menuProfessor() {
+		int opcao;
 		System.out.println("1 - Listar Turmas");
 		System.out.println("2 - Lista Alunos por Turma"); // LISTA AS TURMAS E PEDE PRA ESCOLHER QUAL QUER VER ALUNOS
 		System.out.println("3 - Sair");
+		opcao = sc.nextInt();
+		switch (opcao) {
+			case 1:
+				for (int i = 0; i < universidade.listarCursos().length; i++) {
+					System.out.println(i + 1 + " - " + universidade.listarCursos()[i].getNome());
+				}
+				menuProfessor();
+				/*
+				 * case 2:
+				 * for (int i = 0; i < universidade.listarCursos().length; i++) {
+				 * System.out.println(i + 1 + " - " + universidade.listarCursos()[i].getNome());
+				 * }
+				 * int opcao4 = sc.nextInt();
+				 * Curso curso2 = universidade.listarCursos()[opcao4 - 1];
+				 * for (int i = 0; i < curso2.listarDisciplinas().length; i++) {
+				 * System.out.println(i + 1 + " - " + curso2.listarDisciplinas()[i].getNome());
+				 * }
+				 * int opcao5 = sc.nextInt();
+				 * Disciplina disciplina2 = curso2.listarDisciplinas()[opcao5 - 1];
+				 * for (int i = 0; i < disciplina2.listarTurmas().length; i++) {
+				 * System.out.println(i + 1 + " - " + disciplina2.listarTurmas()[i].getId());
+				 * }
+				 * int opcao6 = sc.nextInt();
+				 * Turma turma = disciplina2.listarTurmas()[opcao6 - 1];
+				 * for (int i = 0; i < turma.listarAlunos().length; i++) {
+				 * System.out.println(i + 1 + " - " + turma.listarAlunos()[i].getNome());
+				 * }
+				 * break;
+				 */
+			case 3:
+				break;
+			default:
+				System.out.println("Opção inválida");
+				break;
+		}
+
 	}
 
 	public static void menuSecretaria() {
 		System.out.println("1 - Listar Cursos");
 		System.out.println("2 - Adicionar Curso");
 		System.out.println("3 - Adicionar Disciplina a um curso existente");
-		System.out.println("4 - Adicionar Turma a uma disciplina existente"); // LISTAR OS PROFESSORES E AS DISCIPLINAS E
-																																					// PERGUNTAR QUAL ADICIONAR
-		System.out.println("5 - Validar turmas");// PERGUNTAR PRIMEIRO QUAL CURSO ELA QUER VER, DEPOIS LISTAR AS TURMAS COM
-																							// O STATUS ""-->EM ANÁLISE<--"" E PERGUNTAR SE QUER CANCELAR OU
-																							// APROVAR (MUDAR O STATUS DA DISCIPLINA)
-																							// -------OBS: MOSTRAR APENAS AS DISCIPLINAS -->EM ANÁLISE<-- QUE O MÉTODO
-																							// (validarTurma) RETORNOU FALSE. IMPRIMIR MOSTRANDO O NOME DA TURMA,
-																							// DISCIPLINA E O NÚMERO DE INSCRITOS, EX: T1 - MATEMATICA - 3 INSCRITOS
+		System.out.println("4 - Adicionar Turma a uma disciplina existente"); // LISTAR OS PROFESSORES E AS DISCIPLINAS
+																				// E
+																				// PERGUNTAR QUAL ADICIONAR
+		System.out.println("5 - Validar turmas");// PERGUNTAR PRIMEIRO QUAL CURSO ELA QUER VER, DEPOIS LISTAR AS TURMAS
+													// COM
+													// O STATUS ""-->EM ANÁLISE<--"" E PERGUNTAR SE QUER CANCELAR OU
+													// APROVAR (MUDAR O STATUS DA DISCIPLINA)
+													// -------OBS: MOSTRAR APENAS AS DISCIPLINAS -->EM ANÁLISE<-- QUE O
+													// MÉTODO
+													// (validarTurma) RETORNOU FALSE. IMPRIMIR MOSTRANDO O NOME DA
+													// TURMA,
+													// DISCIPLINA E O NÚMERO DE INSCRITOS, EX: T1 - MATEMATICA - 3
+													// INSCRITOS
 		System.out.println("6 - Sair");
 	}
 
@@ -79,14 +125,48 @@ public class Main {
 		String usuario = sc.next();
 		System.out.println("Digite a senha do professor: ");
 		String senha = sc.next();
-
 		Professor professor = new Professor(nome, sobrenome, usuario, senha);
+		
 		try {
 			universidade.cadastrarProfessor(professor);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			return; // Sai da função se ocorrer uma exceção
+		}
+		
+		System.out.println("Escolha o curso para este professor:");
+		Curso[] cursos = universidade.listarCursos();
+		for (int i = 0; i < cursos.length; i++) {
+			System.out.println(i + 1 + " - " + cursos[i].getNome());
+		}
+		int opcaoCurso = sc.nextInt();
+		
+		if (opcaoCurso >= 1 && opcaoCurso <= cursos.length) {
+			Curso cursoSelecionado = cursos[opcaoCurso - 1];
+			
+			List<Disciplina> disciplinas = cursoSelecionado.listarDisciplinas();
+			System.out.println("Escolha a disciplina para este professor:");
+			for (int i = 0; i < disciplinas.size(); i++) {
+				System.out.println(i + 1 + " - " + disciplinas.get(i));
+			}
+			int opcaoDisciplina = sc.nextInt();
+			
+			if (opcaoDisciplina >= 1 && opcaoDisciplina <= disciplinas.size()) {
+				Disciplina disciplinaSelecionada = disciplinas.get(opcaoDisciplina - 1);
+				Turma turma = new Turma(professor, disciplinaSelecionada);
+				
+				// Agora você pode fazer o que precisa com a turma criada
+				// turma.adicionarProfessor(professor);
+				
+				System.out.println("Professor cadastrado com sucesso na turma.");
+			} else {
+				System.out.println("Opção de disciplina inválida.");
+			}
+		} else {
+			System.out.println("Opção de curso inválida.");
 		}
 	}
+	
 
 	public static void cadastrarAluno() {
 		System.out.println("Digite o nome do aluno: ");
