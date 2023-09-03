@@ -8,16 +8,22 @@ public class Universidade {
 
   public Universidade() {
     this.alunos = new HashMap<String, Aluno>();
+    this.professores = new HashMap<String, Professor>();
+    this.secretarias = new HashMap<String, Secretaria>();
     this.cursos = new HashMap<String, Curso>();
   }
 
   public Usuario login(String usuario, String senha) {
     HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();
-    usuarios.putAll(this.alunos);
-    usuarios.putAll(this.professores);
-    usuarios.putAll(this.secretarias);
+    try {
+      usuarios.putAll(this.alunos);
+      usuarios.putAll(this.professores);
+      usuarios.putAll(this.secretarias);
+    } catch (Exception e) {
+      return null;
+    }
     Usuario u = usuarios.get(usuario);
-    return u;
+    return u.getSenha().equals(senha) ? u : null;
   };
 
   private void verificarDuplicidade(String usuario) throws Exception {
@@ -50,7 +56,7 @@ public class Universidade {
     this.cursos.put(c.getNome(), c);
   };
 
-  public void CarregarCursos(){
+  public void CarregarCursos() {
     Curso engSoftware = new Curso("EngSoftware", 12, null);
     Curso engConp = new Curso("Eng Coputação", 12, null);
     Curso engCivil = new Curso("eng Civil", 12, null);
@@ -70,8 +76,8 @@ public class Universidade {
     Curso[] cursosArray = new Curso[this.cursos.size()];
     int i = 0;
     for (Curso curso : this.cursos.values()) {
-        cursosArray[i] = curso;
-        i++;
+      cursosArray[i] = curso;
+      i++;
     }
     return cursosArray;
   };

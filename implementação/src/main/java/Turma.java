@@ -26,11 +26,7 @@ public class Turma implements ISalvavel {
   };
 
   public void adicionarHistoricos(Historico historico) throws Exception {
-    if (historicos.size() <= numeroMaximoAlunos) {
-      historicos.add(historico);
-    } else {
-      throw new Exception("A turma está cheia");
-    }
+    historicos.add(historico);
   }
 
   public boolean validarTurma() {

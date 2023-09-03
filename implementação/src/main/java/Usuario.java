@@ -18,4 +18,8 @@ public abstract class Usuario implements ISalvavel {
   public String getUsuario() {
     return usuario;
   }
+
+  public String getSenha() {
+    return senha;
+  }
 }
