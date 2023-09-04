@@ -23,12 +23,7 @@ public class Professor extends Usuario {
   };
 
   public Aluno[] visualizarAlunos(Turma turmaDoAluno) {
-    for (Turma turma : turmasLecionadas) {
-      if (turma.equals(turmaDoAluno) ){
-        return turma.listarAlunos();
-      }
-    }
-    return null;
+    return turmaDoAluno.listarAlunos();
   }
 
   public void adicionarTurmaLecionada(Turma turma) {

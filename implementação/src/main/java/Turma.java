@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Turma implements ISalvavel {
   private Disciplina disciplina;
-  private Professor professor;
+  private final Professor professor;
   private List<Historico> historicos;
   private ETurmaStatus status;
 
@@ -20,17 +20,20 @@ public class Turma implements ISalvavel {
     // TODO
   };
 
-  public void adicionarHistoricos(Historico historico) {
+  public void adicionarHistoricos(Historico historico) throws IllegalArgumentException {
+    if (historicos.contains(historico))
+      throw new IllegalArgumentException("Aluno já matriculado");
+    else if (historicos.size() >= 60)
+      throw new IllegalArgumentException("Número máximo de alunos atingido");
     historicos.add(historico);
   }
 
   public Aluno[] listarAlunos() {
-    List<Aluno> alunos = new ArrayList<>();
-    for (Historico historico : historicos) {
-      if (historico.getStatus() == EStatus.CURSANDO)
-        alunos.add(historico.getAluno());
+    Aluno[] alunos = new Aluno[historicos.size()];
+    for (int i = 0; i < historicos.size(); i++) {
+      alunos[i] = historicos.get(i).getAluno();
     }
-    return alunos.toArray(null);
+    return alunos;
   }
 
   public void setStatus(ETurmaStatus es) {

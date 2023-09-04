@@ -6,13 +6,11 @@ public class Disciplina implements ISalvavel {
   private double valor;
   private int creditos;
   private List<Turma> turmas;
-  private int inscritos;
 
   public Disciplina(String nome, double valor, int creditos) {
     this.nome = nome;
     this.valor = valor;
     this.creditos = creditos;
-    this.inscritos = 0;
     this.turmas = new ArrayList<>();
   }
 

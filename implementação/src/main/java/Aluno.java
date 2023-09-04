@@ -4,6 +4,7 @@ import java.util.List;
 public class Aluno extends Usuario {
   private Curso curso;
   private List<Historico> turmas;
+  private final int MAXIMO_TURMAS = 6;
 
   public Aluno(String nome, String sobrenome, String usuario, String senha, Curso c) {
     super(nome, sobrenome, usuario, senha, false);
@@ -16,11 +17,14 @@ public class Aluno extends Usuario {
     // TODO
   };
 
-  public void matricular(Turma turma) {
+  public void matricular(Turma turma) throws IllegalArgumentException {
+    if (turmas.size() >= MAXIMO_TURMAS) {
+      throw new IllegalArgumentException("Número máximo de turmas atingido");
+    }
     Historico historico = new Historico(turma, this);
     turmas.add(historico);
     turma.adicionarHistoricos(historico);
-    };
+  };
 
   public void cancelarMatricula(Turma turma) throws NullPointerException {
     for (Historico historico : turmas) {

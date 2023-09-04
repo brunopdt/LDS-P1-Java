@@ -328,13 +328,9 @@ public class Main {
 		int opcao = sc.nextInt();
 		Turma turma = ((Professor) usuarioLogado).listarTurmasLecionadas()[opcao - 1];
 		System.out.println("Alunos da turma de: " + turma.getDisciplina().getNome());
-		try {
-			for (Aluno aluno : ((Professor) usuarioLogado)
-					.visualizarAlunos(turma)) {
-				System.out.println(aluno.getNomeCompleto());
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		for (Aluno aluno : ((Professor) usuarioLogado)
+				.visualizarAlunos(turma)) {
+			System.out.println(aluno.getNomeCompleto());
 		}
 	}
 
@@ -390,7 +386,7 @@ public class Main {
 		try {
 			((Aluno) usuarioLogado).matricular(
 					((Aluno) usuarioLogado).getCurso().listarDisciplinas()[opcao - 1].listarTurmas()[0]);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -410,7 +406,7 @@ public class Main {
 		Turma[] turmas = ((Aluno) usuarioLogado).listarTurmasMatriculadas();
 		System.out.println("Disciplinas cursando no momento: ");
 		for (int i = 0; i < turmas.length; i++) {
-			System.out.println(i+ 1 + " - " + turmas[i].getDisciplina().getNome());
+			System.out.println(i + 1 + " - " + turmas[i].getDisciplina().getNome());
 		}
 	}
 
@@ -419,20 +415,20 @@ public class Main {
 	}
 
 	private static void popularCursos() {
+		Disciplina disci1Disciplina = new Disciplina("Algoritmos", 1, 1);
+		Disciplina disci2Disciplina = new Disciplina("Banco de Dados", 1, 1);
+		Disciplina disci3Disciplina = new Disciplina("Estrutura de Dados", 1, 1);
+		Disciplina disci4Disciplina = new Disciplina("Programação Orientada a Objetos", 1, 1);
+		Disciplina disci5Disciplina = new Disciplina("Programação Web", 1, 1);
+		Disciplina disci6Disciplina = new Disciplina("Redes", 1, 1);
+		Disciplina disci7Disciplina = new Disciplina("Sistemas Operacionais", 1, 1);
+		Disciplina disci8Disciplina = new Disciplina("Teste de Software", 1, 1);
+		Disciplina disci9Disciplina = new Disciplina("Engenharia de Software", 1, 1);
+		Disciplina disci10Disciplina = new Disciplina("Matemática", 1, 1);
+		Disciplina disci11Disciplina = new Disciplina("Física", 1, 1);
+		Disciplina disci12Disciplina = new Disciplina("Química", 1, 1);
+		Disciplina disci13Disciplina = new Disciplina("Cálculo", 1, 1);
 		for (int i = 0; i < universidade.listarCursos().length - 1; i++) {
-			Disciplina disci1Disciplina = new Disciplina("Algoritimos", 1, 1);
-			Disciplina disci2Disciplina = new Disciplina("Banco de Dados", 1, 1);
-			Disciplina disci3Disciplina = new Disciplina("Estrutura de Dados", 1, 1);
-			Disciplina disci4Disciplina = new Disciplina("Programação Orientada a Objetos", 1, 1);
-			Disciplina disci5Disciplina = new Disciplina("Programação Web", 1, 1);
-			Disciplina disci6Disciplina = new Disciplina("Redes", 1, 1);
-			Disciplina disci7Disciplina = new Disciplina("Sistemas Operacionais", 1, 1);
-			Disciplina disci8Disciplina = new Disciplina("Teste de Software", 1, 1);
-			Disciplina disci9Disciplina = new Disciplina("Engenharia de Software", 1, 1);
-			Disciplina disci10Disciplina = new Disciplina("Matemática", 1, 1);
-			Disciplina disci11Disciplina = new Disciplina("Física", 1, 1);
-			Disciplina disci12Disciplina = new Disciplina("Química", 1, 1);
-			Disciplina disci13Disciplina = new Disciplina("Cálculo", 1, 1);
 			universidade.cadastrarDisciplina(disci1Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci2Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci3Disciplina, universidade.listarCursos()[i]);
@@ -447,37 +443,36 @@ public class Main {
 			universidade.cadastrarDisciplina(disci11Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci12Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci13Disciplina, universidade.listarCursos()[i]);
-
-			disci1Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci1Disciplina));
-			disci2Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci2Disciplina));
-			disci3Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci3Disciplina));
-			disci4Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci4Disciplina));
-			disci5Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci5Disciplina));
-			disci6Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci6Disciplina));
-			disci7Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci7Disciplina));
-			disci8Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci8Disciplina));
-			disci9Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci9Disciplina));
-			disci10Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci10Disciplina));
-			disci11Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci11Disciplina));
-			disci12Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci12Disciplina));
-			disci13Disciplina
-					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci13Disciplina));
 		}
+		disci1Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci1Disciplina));
+		disci2Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci2Disciplina));
+		disci3Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci3Disciplina));
+		disci4Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci4Disciplina));
+		disci5Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci5Disciplina));
+		disci6Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci6Disciplina));
+		disci7Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci7Disciplina));
+		disci8Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci8Disciplina));
+		disci9Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci9Disciplina));
+		disci10Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci10Disciplina));
+		disci11Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci11Disciplina));
+		disci12Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci12Disciplina));
+		disci13Disciplina
+				.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci13Disciplina));
 	}
 
-	private static void popularUsuaios() {
+	private static void popularUsuarios() {
 		Curso engSoftware = new Curso("EngSoftware", 12);
 		Curso engConp = new Curso("Eng Coputação", 12);
 		Curso engCivil = new Curso("eng Civil", 12);
@@ -522,11 +517,15 @@ public class Main {
 
 	private static void popularMatriculas() {
 		Aluno aluno = (Aluno) universidade.login("joao", "123");
-		aluno.matricular(aluno.getCurso().listarDisciplinas()[0].listarTurmas()[0]);
+		try {
+			aluno.matricular(aluno.getCurso().listarDisciplinas()[0].listarTurmas()[0]);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static void main(String[] args) {
-		popularUsuaios();
+		popularUsuarios();
 		popularCursos();
 		popularMatriculas();
 		iniciarAplicacao();
