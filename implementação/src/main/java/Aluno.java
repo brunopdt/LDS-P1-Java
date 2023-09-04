@@ -18,12 +18,9 @@ public class Aluno extends Usuario {
 
   public void matricular(Turma turma) {
     Historico historico = new Historico(turma, this);
-    try {
-      turma.adicionarHistoricos(historico);
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-  };
+    turmas.add(historico);
+    turma.adicionarHistoricos(historico);
+    };
 
   public void cancelarMatricula(Turma turma) throws NullPointerException {
     for (Historico historico : turmas) {

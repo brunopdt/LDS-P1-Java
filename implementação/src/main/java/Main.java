@@ -410,7 +410,7 @@ public class Main {
 		Turma[] turmas = ((Aluno) usuarioLogado).listarTurmasMatriculadas();
 		System.out.println("Disciplinas cursando no momento: ");
 		for (int i = 0; i < turmas.length; i++) {
-			System.out.println(i + " - " + turmas[i].getDisciplina().getNome());
+			System.out.println(i+ 1 + " - " + turmas[i].getDisciplina().getNome());
 		}
 	}
 
@@ -460,6 +460,20 @@ public class Main {
 					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci5Disciplina));
 			disci6Disciplina
 					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci6Disciplina));
+			disci7Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci7Disciplina));
+			disci8Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci8Disciplina));
+			disci9Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci9Disciplina));
+			disci10Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci10Disciplina));
+			disci11Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci11Disciplina));
+			disci12Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci12Disciplina));
+			disci13Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci13Disciplina));
 		}
 	}
 

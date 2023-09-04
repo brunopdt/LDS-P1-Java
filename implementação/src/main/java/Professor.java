@@ -24,7 +24,7 @@ public class Professor extends Usuario {
 
   public Aluno[] visualizarAlunos(Turma turmaDoAluno) {
     for (Turma turma : turmasLecionadas) {
-      if (turma.equals(turmaDoAluno) && turma.getStatus() == ETurmaStatus.ATIVA) {
+      if (turma.equals(turmaDoAluno) ){
         return turma.listarAlunos();
       }
     }
