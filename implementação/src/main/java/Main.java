@@ -275,31 +275,20 @@ public class Main {
 	}
 
 	private static void popularCursos() {
-		Curso engSoftware = new Curso("EngSoftware", 12, null);
-		Curso engConp = new Curso("Eng Coputação", 12, null);
-		Curso engCivil = new Curso("eng Civil", 12, null);
-		Curso engElet = new Curso("Eng Eletrica", 12, null);
-		Curso engQui = new Curso("Eng Quimica", 12, null);
-		universidade.cadastrarCurso(engSoftware);
-		universidade.cadastrarCurso(engConp);
-		universidade.cadastrarCurso(engCivil);
-		universidade.cadastrarCurso(engElet);
-		universidade.cadastrarCurso(engQui);
-
-		for (int i = 0; i < universidade.listarCursos().length; i++) {
-			Disciplina disci1Disciplina = new Disciplina("Algoritimos", 20);
-			Disciplina disci2Disciplina = new Disciplina("Banco de Dados", 20);
-			Disciplina disci3Disciplina = new Disciplina("Estrutura de Dados", 20);
-			Disciplina disci4Disciplina = new Disciplina("Programação Orientada a Objetos", 20);
-			Disciplina disci5Disciplina = new Disciplina("Programação Web", 20);
-			Disciplina disci6Disciplina = new Disciplina("Redes", 20);
-			Disciplina disci7Disciplina = new Disciplina("Sistemas Operacionais", 20);
-			Disciplina disci8Disciplina = new Disciplina("Teste de Software", 20);
-			Disciplina disci9Disciplina = new Disciplina("Engenharia de Software", 20);
-			Disciplina disci10Disciplina = new Disciplina("Matemática", 20);
-			Disciplina disci11Disciplina = new Disciplina("Física", 20);
-			Disciplina disci12Disciplina = new Disciplina("Química", 20);
-			Disciplina disci13Disciplina = new Disciplina("Cálculo", 20);
+		for (int i = 0; i < universidade.listarCursos().length - 1; i++) {
+			Disciplina disci1Disciplina = new Disciplina("Algoritimos", 1);
+			Disciplina disci2Disciplina = new Disciplina("Banco de Dados", 1);
+			Disciplina disci3Disciplina = new Disciplina("Estrutura de Dados", 1);
+			Disciplina disci4Disciplina = new Disciplina("Programação Orientada a Objetos", 1);
+			Disciplina disci5Disciplina = new Disciplina("Programação Web", 1);
+			Disciplina disci6Disciplina = new Disciplina("Redes", 1);
+			Disciplina disci7Disciplina = new Disciplina("Sistemas Operacionais", 1);
+			Disciplina disci8Disciplina = new Disciplina("Teste de Software", 1);
+			Disciplina disci9Disciplina = new Disciplina("Engenharia de Software", 1);
+			Disciplina disci10Disciplina = new Disciplina("Matemática", 1);
+			Disciplina disci11Disciplina = new Disciplina("Física", 1);
+			Disciplina disci12Disciplina = new Disciplina("Química", 1);
+			Disciplina disci13Disciplina = new Disciplina("Cálculo", 1);
 			universidade.cadastrarDisciplina(disci1Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci2Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci3Disciplina, universidade.listarCursos()[i]);
@@ -314,6 +303,33 @@ public class Main {
 			universidade.cadastrarDisciplina(disci11Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci12Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci13Disciplina, universidade.listarCursos()[i]);
+
+			disci1Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci1Disciplina));
+			disci2Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci2Disciplina));
+			disci3Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci3Disciplina));
+			disci4Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci4Disciplina));
+			disci5Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci5Disciplina));
+			disci6Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci6Disciplina));
+		}
+	}
+
+	private static void popularUsuaios() {
+		Curso engSoftware = new Curso("EngSoftware", 12, null);
+		Curso engConp = new Curso("Eng Coputação", 12, null);
+		Curso engCivil = new Curso("eng Civil", 12, null);
+		Curso engElet = new Curso("Eng Eletrica", 12, null);
+		Curso engQui = new Curso("Eng Quimica", 12, null);
+		universidade.cadastrarCurso(engSoftware);
+		universidade.cadastrarCurso(engConp);
+		universidade.cadastrarCurso(engCivil);
+		universidade.cadastrarCurso(engElet);
+		universidade.cadastrarCurso(engQui);
+
+		try {
+			universidade.cadastrarAluno(new Aluno("João", "Silva", "joao", "123", universidade.listarCursos()[0]));
+			universidade.cadastrarProfessor(new Professor("Maria", "Silva", "maria", "123"));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -340,6 +356,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		popularUsuaios();
 		popularCursos();
 		iniciarAplicacao();
 
