@@ -70,6 +70,16 @@ public class Universidade {
     c.adicionarDisciplina(d);
   };
 
+  public Professor[] listarProfessores() {
+    Professor[] professoresArray = new Professor[this.professores.size()];
+    int i = 0;
+    for (Professor professor : this.professores.values()) {
+      professoresArray[i] = professor;
+      i++;
+    }
+    return professoresArray;
+  };
+
   public void carregarDeArquivo() {
     // TODO
   };

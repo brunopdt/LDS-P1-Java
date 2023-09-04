@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -36,20 +35,10 @@ public class Main {
 		System.out.println("1 - Listar Cursos");
 		System.out.println("2 - Adicionar Curso");
 		System.out.println("3 - Adicionar Disciplina a um curso existente");
-		System.out.println("4 - Adicionar Turma a uma disciplina existente"); // LISTAR OS PROFESSORES E AS DISCIPLINAS
-		// E
-		// PERGUNTAR QUAL ADICIONAR
-		System.out.println("5 - Validar turmas");// PERGUNTAR PRIMEIRO QUAL CURSO ELA QUER VER, DEPOIS LISTAR AS TURMAS
-		// COM
-		// O STATUS ""-->EM ANÁLISE<--"" E PERGUNTAR SE QUER CANCELAR OU
-		// APROVAR (MUDAR O STATUS DA DISCIPLINA)
-		// -------OBS: MOSTRAR APENAS AS DISCIPLINAS -->EM ANÁLISE<-- QUE O
-		// MÉTODO
-		// (validarTurma) RETORNOU FALSE. IMPRIMIR MOSTRANDO O NOME DA
-		// TURMA,
-		// DISCIPLINA E O NÚMERO DE INSCRITOS, EX: T1 - MATEMATICA - 3
-		// INSCRITOS
-		System.out.println("6 - Sair");
+		System.out.println("4 - Ver as Disciplinas de um curso específico");
+		System.out.println("5 - Adicionar Turma a uma disciplina existente");
+		System.out.println("6 - Validar turmas");
+		System.out.println("7 - Sair");
 	}
 
 	public static void cadastrarSecretaria() {
@@ -62,7 +51,7 @@ public class Main {
 		System.out.println("Digite a senha da secretaria: ");
 		String senha = sc.next();
 
-		Secretaria secretaria = new Secretaria(nome, sobrenome, usuario, senha, universidade);
+		Secretaria secretaria = new Secretaria(nome, sobrenome, usuario, senha);
 		try {
 			universidade.cadastrarSecretaria(secretaria);
 		} catch (Exception e) {
@@ -148,12 +137,160 @@ public class Main {
 				} else if (usuarioLogado instanceof Professor) {
 					execProf();
 				} else if (usuarioLogado instanceof Secretaria) {
-					menuSecretaria();
+					execSecretaria();
 				}
 			}
 		} catch (NullPointerException e) {
 			System.out.println("Usuário ou senha inválidos");
 			login();
+		}
+	}
+
+	private static void execSecretaria() {
+		int opcao = 0;
+		System.out.println("\n");
+		menuSecretaria();
+		opcao = sc.nextInt();
+		switch (opcao) {
+			case 1:
+				listarCursos();
+				execSecretaria();
+				break;
+			case 2:
+				adicionarCurso();
+				execSecretaria();
+				break;
+			case 3:
+				adicionarDisciplina();
+				execSecretaria();
+				break;
+			case 4:
+				listarDisciplinasPorCurso();
+				execSecretaria();
+				break;
+			case 5:
+				adicionarTurma();
+				execSecretaria();
+				break;
+			case 6:
+				validarTurma();
+				execSecretaria();
+				break;
+			case 7:
+				logout();
+				break;
+			default:
+				System.out.println("Opção inválida");
+				break;
+		}
+	}
+
+	private static void listarDisciplinasPorCurso() {
+		System.out.println("Escolha o curso que deseja ver as disciplinas: ");
+		listarCursos();
+		int opcao = sc.nextInt();
+		Curso curso = universidade.listarCursos()[opcao - 1];
+
+		System.out.println("\n");
+		for (int i = 0; i < curso.listarDisciplinas().length; i++) {
+			System.out.println(i + 1 + " - " + curso.listarDisciplinas()[i].getNome());
+		}
+	}
+
+	private static void validarTurma() {
+		System.out.println("Escolha o curso que deseja validar as turmas: ");
+		listarCursos();
+		int opcao = sc.nextInt();
+		Curso curso = universidade.listarCursos()[opcao - 1];
+
+		System.out.println("Escolha a disciplina que deseja ver as turmas: ");
+		for (int i = 0; i < curso.listarDisciplinas().length; i++) {
+			System.out.println(i + 1 + " - " + curso.listarDisciplinas()[i].getNome());
+		}
+		opcao = sc.nextInt();
+		Disciplina disciplina = curso.listarDisciplinas()[opcao - 1];
+
+		if (disciplina.listarTurmasEmAnalise().length == 0) {
+			System.out.println("Não há turmas para validar");
+			return;
+		}
+
+		System.out.println("Turmas que precisam da sua atenção: (escolha uma para validar) ");
+
+		for (int i = 0; i < disciplina.listarTurmasEmAnalise().length; i++) {
+			if (disciplina.listarTurmasEmAnalise()[i].getStatus() == ETurmaStatus.EM_ANALISE)
+				System.out.println(i + 1 + " - " + disciplina.listarTurmas()[i].getDisciplina().getNome() + " - "
+						+ disciplina.listarTurmas()[i].getInscritos() + " inscrito(s)");
+		}
+		opcao = sc.nextInt();
+		Turma turma = disciplina.listarTurmas()[opcao - 1];
+
+		System.out.println("1 - Ativar");
+		System.out.println("2 - Cancelar");
+		opcao = sc.nextInt();
+		if (opcao == 1) {
+			((Secretaria) usuarioLogado).validarTurma(turma, ETurmaStatus.ATIVA);
+		} else if (opcao == 2) {
+			((Secretaria) usuarioLogado).validarTurma(turma, ETurmaStatus.CANCELADA);
+		} else {
+			System.out.println("Opção inválida");
+		}
+	}
+
+	private static void adicionarTurma() {
+		System.out.println("Escolha o curso que deseja adicionar a turma: ");
+		listarCursos();
+		int opcao = sc.nextInt();
+		Curso curso = universidade.listarCursos()[opcao - 1];
+		System.out.println("Escolha a disciplina que deseja adicionar a turma: ");
+		for (int i = 0; i < curso.listarDisciplinas().length; i++) {
+			System.out.println(i + 1 + " - " + curso.listarDisciplinas()[i].getNome());
+		}
+		opcao = sc.nextInt();
+		Disciplina disciplina = curso.listarDisciplinas()[opcao - 1];
+		System.out.println("Escolha o professor que lecionará a turma: ");
+		for (int i = 0; i < universidade.listarProfessores().length; i++) {
+			System.out.println(i + 1 + " - " + universidade.listarProfessores()[i].getNomeCompleto());
+		}
+		opcao = sc.nextInt();
+		Professor professor = universidade.listarProfessores()[opcao - 1];
+		Turma turma = new Turma(professor, disciplina);
+		disciplina.adicionarTurma(turma);
+	}
+
+	private static void adicionarDisciplina() {
+		sc.nextLine();
+		System.out.println("Escolha o curso que deseja adicionar a disciplina: ");
+		listarCursos();
+		int opcao = sc.nextInt();
+		Curso curso = universidade.listarCursos()[opcao - 1];
+		sc.nextLine();
+		System.out.println("Digite o nome da disciplina: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite o valor da disciplina: ");
+		double valor = sc.nextDouble();
+		System.out.println("Digite a quantidade de créditos da disciplina: ");
+		int creditos = sc.nextInt();
+		Disciplina disciplina = new Disciplina(nome, valor, creditos);
+
+		universidade.cadastrarDisciplina(disciplina, curso);
+
+	}
+
+	private static void adicionarCurso() {
+		sc.nextLine();
+		System.out.println("Digite o nome do curso: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite a quantidade de créditos do curso: ");
+		int creditos = sc.nextInt();
+		Curso curso = new Curso(nome, creditos);
+		universidade.cadastrarCurso(curso);
+	}
+
+	private static void listarCursos() {
+		System.out.println("Cursos cadastrados: ");
+		for (int i = 0; i < universidade.listarCursos().length; i++) {
+			System.out.println(i + 1 + " - " + universidade.listarCursos()[i].getNome());
 		}
 	}
 
@@ -164,6 +301,7 @@ public class Main {
 
 	public static void execProf() {
 		int opcao = 0;
+		System.out.println("\n");
 		menuProfessor();
 		opcao = sc.nextInt();
 		switch (opcao) {
@@ -212,6 +350,7 @@ public class Main {
 
 	public static void execAluno() {
 		int opcao = 0;
+		System.out.println("\n");
 		menuAluno();
 		opcao = sc.nextInt();
 		switch (opcao) {
@@ -339,6 +478,7 @@ public class Main {
 		try {
 			universidade.cadastrarAluno(new Aluno("João", "Silva", "joao", "123", universidade.listarCursos()[0]));
 			universidade.cadastrarProfessor(new Professor("Maria", "Silva", "maria", "123"));
+			universidade.cadastrarSecretaria(new Secretaria("Ana", "Silva", "ana", "123"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

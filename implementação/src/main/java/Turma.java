@@ -5,15 +5,11 @@ public class Turma implements ISalvavel {
   private Disciplina disciplina;
   private Professor professor;
   private List<Historico> historicos;
-  private int numeroMaximoAlunos;
-  private int numeroMinimoAlunos;
   private ETurmaStatus status;
 
   public Turma(Professor professor, Disciplina disciplina) {
     this.disciplina = disciplina;
     this.professor = professor;
-    this.numeroMaximoAlunos = 60;
-    this.numeroMinimoAlunos = 3;
     this.status = ETurmaStatus.EM_ANALISE;
     historicos = new ArrayList<>();
     professor.adicionarTurmaLecionada(this);
@@ -26,10 +22,6 @@ public class Turma implements ISalvavel {
 
   public void adicionarHistoricos(Historico historico) {
     historicos.add(historico);
-  }
-
-  public boolean validarTurma() {
-    return (historicos.size() < numeroMinimoAlunos || historicos.size() > numeroMaximoAlunos);
   }
 
   public Aluno[] listarAlunos() {
@@ -51,5 +43,9 @@ public class Turma implements ISalvavel {
 
   public Disciplina getDisciplina() {
     return disciplina;
+  }
+
+  public int getInscritos() {
+    return historicos.size();
   }
 }
