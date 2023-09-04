@@ -22,4 +22,8 @@ public abstract class Usuario implements ISalvavel {
   public String getSenha() {
     return senha;
   }
+
+  public String getNomeCompleto() {
+    return nome + " " + sobrenome;
+  }
 }

@@ -19,12 +19,7 @@ public class Main {
 	}
 
 	public static void menuAluno() {
-		System.out.println("1 - Matricular em uma Turma"); // LISTAR AS TURMAS COM RESPECTIVAS MATÉRIAS E PERGUNTAR QUAL
-		// QUER MATRICULAR, EX: T1-MATEMATICA, T2-PORTUGUES
-		// ---------
-		// OBS: COLOCAR UM TRY CATCH CASO O VALOR DE CRÉDITOS EXCEDA
-		// O
-		// MÁXIMO PERMITIDO
+		System.out.println("1 - Matricular em uma Turma"); // VALIDAR OS CRÉDITOS E THROW EXCEPTION
 		System.out.println("2 - Cancelar Matricula");
 		System.out.println("3 - Listar Turmas Matriculadas");
 		System.out.println("4 - Valor Matricula");
@@ -33,7 +28,7 @@ public class Main {
 
 	public static void menuProfessor() {
 		System.out.println("1 - Listar Turmas");
-		System.out.println("2 - Lista Alunos por Turma"); // LISTA AS TURMAS E PEDE PRA ESCOLHER QUAL QUER VER ALUNOS
+		System.out.println("2 - Lista Alunos por Turma");
 		System.out.println("3 - Sair");
 	}
 
@@ -162,6 +157,52 @@ public class Main {
 	public static void logout() {
 		usuarioLogado = null;
 		iniciarAplicacao();
+	}
+
+	public static void execProf() {
+		int opcao = 0;
+		menuProfessor();
+		opcao = sc.nextInt();
+		switch (opcao) {
+			case 1:
+				listarTurmas();
+				break;
+			case 2:
+				listarAlunosPorTurma();
+				break;
+			case 3:
+				logout();
+				break;
+			default:
+				System.out.println("Opção inválida");
+				break;
+		}
+	}
+
+	private static void listarAlunosPorTurma() {
+		listarTurmas();
+		int opcao = sc.nextInt();
+		Turma turma = ((Professor) usuarioLogado).listarTurmasLecionadas()[opcao - 1];
+		System.out.println("Alunos da turma de: " + turma.getDisciplina().getNome());
+		try {
+			for (Aluno aluno : ((Professor) usuarioLogado)
+					.visualizarAlunos(turma)) {
+				System.out.println(aluno.getNomeCompleto());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		execProf();
+	}
+
+	private static void listarTurmas() {
+		int index = 1;
+		System.out.println("Turmas ministradas: ");
+		for (Turma turma : ((Professor) usuarioLogado).listarTurmasLecionadas()) {
+			System.out.println(index + " - " + turma.getDisciplina().getNome());
+			index++;
+		}
+		execProf();
 	}
 
 	public static void execAluno() {

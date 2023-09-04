@@ -13,8 +13,8 @@ public class Professor extends Usuario {
     // TODO
   };
 
-  public List<Turma> listarTurmasLecionadas() {
-    return turmasLecionadas;
+  public Turma[] listarTurmasLecionadas() {
+    return turmasLecionadas.toArray(null);
   };
 
   public Aluno[] visualizarAlunos(Turma turmaDoAluno) {
