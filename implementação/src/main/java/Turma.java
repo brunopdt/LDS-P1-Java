@@ -2,14 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turma implements ISalvavel {
-  private String id;
   private Disciplina disciplina;
   private Professor professor;
   private List<Historico> historicos;
   private int numeroMaximoAlunos;
   private int numeroMinimoAlunos;
   private ETurmaStatus status;
-  private double valor;
 
   public Turma(Professor professor, Disciplina disciplina) {
     this.disciplina = disciplina;
@@ -25,7 +23,7 @@ public class Turma implements ISalvavel {
     // TODO
   };
 
-  public void adicionarHistoricos(Historico historico) throws Exception {
+  public void adicionarHistoricos(Historico historico) {
     historicos.add(historico);
   }
 
@@ -48,5 +46,9 @@ public class Turma implements ISalvavel {
 
   public ETurmaStatus getStatus() {
     return status;
+  }
+
+  public Disciplina getDisciplina() {
+    return disciplina;
   }
 }

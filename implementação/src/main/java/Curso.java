@@ -11,8 +11,8 @@ public class Curso implements ISalvavel {
     this.disciplinas = disciplinas;
   }
 
-  public List<Disciplina> listarDisciplinas() {
-    return disciplinas;
+  public Disciplina[] listarDisciplinas() {
+    return disciplinas.toArray(null);
   };
 
   public void salvarEmArquivo() {

@@ -28,18 +28,27 @@ public class Aluno extends Usuario {
   public void cancelarMatricula(Turma turma) throws NullPointerException {
     for (Historico historico : turmas) {
       if (historico.getTurma().equals(turma)) {
-        historico.status = EStatus.TRANCADO; // Remove o historico da lista da Turma ou não?
+        historico.status = EStatus.TRANCADO;
       } else {
         throw new NullPointerException("Turma não encontrada dentre as matriculas");
       }
-
     }
   };
 
-  public void listarTurmasMatriculadas() {
-  };
+  public Turma[] listarTurmasMatriculadas() {
+    return turmas.stream()
+        .filter(historico -> historico.getStatus() == EStatus.CURSANDO)
+        .map(Historico::getTurma)
+        .toArray(Turma[]::new);
+  }
 
   public double valorMatricula() {
-    return 0;
+    return turmas.stream()
+        .mapToDouble(historico -> historico.getTurma().getDisciplina().getValor())
+        .sum();
   };
+
+  public Curso getCurso() {
+    return curso;
+  }
 }
