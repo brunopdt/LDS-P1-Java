@@ -16,6 +16,7 @@ public class Turma implements ISalvavel {
     this.numeroMinimoAlunos = 3;
     this.status = ETurmaStatus.EM_ANALISE;
     historicos = new ArrayList<>();
+    professor.adicionarTurmaLecionada(this);
   }
 
   @Override

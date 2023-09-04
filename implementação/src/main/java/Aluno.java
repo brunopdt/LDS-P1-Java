@@ -36,10 +36,11 @@ public class Aluno extends Usuario {
   };
 
   public Turma[] listarTurmasMatriculadas() {
-    return turmas.stream()
+    Turma[] turmasMatriculadas = turmas.stream()
         .filter(historico -> historico.getStatus() == EStatus.CURSANDO)
         .map(Historico::getTurma)
         .toArray(Turma[]::new);
+    return turmasMatriculadas;
   }
 
   public double valorMatricula() {

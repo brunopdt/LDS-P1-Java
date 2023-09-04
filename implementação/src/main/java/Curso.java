@@ -9,12 +9,16 @@ public class Curso implements ISalvavel {
   public Curso(String nome, int creditos) {
     this.nome = nome;
     this.creditos = creditos;
-    this.disciplinas =  new ArrayList<>();
-;
+    this.disciplinas = new ArrayList<>();
+    ;
   }
 
   public Disciplina[] listarDisciplinas() {
-    return disciplinas.toArray(null);
+    Disciplina[] disciplinasDoCurso = new Disciplina[disciplinas.size()];
+    for (int i = 0; i < disciplinas.size(); i++) {
+      disciplinasDoCurso[i] = disciplinas.get(i);
+    }
+    return disciplinasDoCurso;
   };
 
   public void salvarEmArquivo() {
