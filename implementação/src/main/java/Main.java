@@ -145,7 +145,7 @@ public class Main {
 			if (usuarioLogado instanceof Aluno) {
 				execAluno();
 			} else if (usuarioLogado instanceof Professor) {
-				menuProfessor();
+				execProf();
 			} else if (usuarioLogado instanceof Secretaria) {
 				menuSecretaria();
 			}
@@ -304,21 +304,27 @@ public class Main {
 			universidade.cadastrarDisciplina(disci12Disciplina, universidade.listarCursos()[i]);
 			universidade.cadastrarDisciplina(disci13Disciplina, universidade.listarCursos()[i]);
 
-			disci1Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci1Disciplina));
-			disci2Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci2Disciplina));
-			disci3Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci3Disciplina));
-			disci4Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci4Disciplina));
-			disci5Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci5Disciplina));
-			disci6Disciplina.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci6Disciplina));
+			disci1Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci1Disciplina));
+			disci2Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci2Disciplina));
+			disci3Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci3Disciplina));
+			disci4Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci4Disciplina));
+			disci5Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci5Disciplina));
+			disci6Disciplina
+					.adicionarTurma(new Turma((Professor) universidade.login("maria", "123"), disci6Disciplina));
 		}
 	}
 
 	private static void popularUsuaios() {
-		Curso engSoftware = new Curso("EngSoftware", 12, null);
-		Curso engConp = new Curso("Eng Coputação", 12, null);
-		Curso engCivil = new Curso("eng Civil", 12, null);
-		Curso engElet = new Curso("Eng Eletrica", 12, null);
-		Curso engQui = new Curso("Eng Quimica", 12, null);
+		Curso engSoftware = new Curso("EngSoftware", 12);
+		Curso engConp = new Curso("Eng Coputação", 12);
+		Curso engCivil = new Curso("eng Civil", 12);
+		Curso engElet = new Curso("Eng Eletrica", 12);
+		Curso engQui = new Curso("Eng Quimica", 12);
 		universidade.cadastrarCurso(engSoftware);
 		universidade.cadastrarCurso(engConp);
 		universidade.cadastrarCurso(engCivil);
@@ -335,24 +341,24 @@ public class Main {
 
 	public static void iniciarAplicacao() {
 		int opcao = 0;
-		do {
-			menuInicial();
-			opcao = sc.nextInt();
-			switch (opcao) {
-				case 1:
-					login();
-					break;
-				case 2:
-					cadastrar();
-					break;
-				case 3:
-					System.out.println("Saindo...");
-					break;
-				default:
-					System.out.println("Opção inválida");
-					break;
-			}
-		} while (opcao != 3);
+
+		menuInicial();
+		opcao = sc.nextInt();
+		switch (opcao) {
+			case 1:
+				login();
+				break;
+			case 2:
+				cadastrar();
+				break;
+			case 3:
+				System.out.println("Saindo...");
+				break;
+			default:
+				System.out.println("Opção inválida");
+				break;
+		}
+
 	}
 
 	public static void main(String[] args) {

@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Usuario {
-  private List<Turma> turmasLecionadas;
+  private List<Turma> turmasLecionadas ;
 
   public Professor(String nome, String sobrenome, String usuario, String senha) {
     super(nome, sobrenome, usuario, senha, false);
-    this.turmasLecionadas = null;
+    this.turmasLecionadas = new ArrayList<>();
   }
 
   @Override

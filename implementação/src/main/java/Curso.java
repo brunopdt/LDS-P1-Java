@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Curso implements ISalvavel {
@@ -5,10 +6,11 @@ public class Curso implements ISalvavel {
   private int creditos;
   private List<Disciplina> disciplinas;
 
-  public Curso(String nome, int creditos, List<Disciplina> disciplinas) {
+  public Curso(String nome, int creditos) {
     this.nome = nome;
     this.creditos = creditos;
-    this.disciplinas = disciplinas;
+    this.disciplinas =  new ArrayList<>();
+;
   }
 
   public Disciplina[] listarDisciplinas() {
